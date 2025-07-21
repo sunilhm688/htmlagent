@@ -58,7 +58,7 @@ async def generate_site(req: GenerateRequest):
 
         response = supabase.table("sites").insert(insert_data).execute()
         # Check insert success (status_code 201 = success creation)
-        if response.get("status_code", 201) > 210:
+        if response.status_code > 210:
             raise HTTPException(status_code=500, detail="Failed to insert record into database.")
 
         # 3. Return generated HTML in JSON response
